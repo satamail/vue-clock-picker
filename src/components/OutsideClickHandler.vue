@@ -1,7 +1,13 @@
-<template lang="pug">
+<template>
 
-div(ref="childnode" class="outside-click-container" @mouseover="overModal=true" @mouseout="overModal=false")
-	slot(name="modal")
+<div
+    ref="childnode"
+    class="outside-click-container"
+    @mouseover="overModal=true"
+    @mouseout="overModal=false"
+    >
+  <slot name="modal"></slot>
+</div>
 
 </template>
 

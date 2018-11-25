@@ -1,7 +1,18 @@
-<template lang="pug">
+<template>
 
-div(':style'="inlineStyle" '@click'="handleTimeChange(index,angle)" class="picker-point" ':class'="[pointClass,{current:picked}]")
-	div(class="pointer-wrapper" ':style'="wrapperStyle") {{index}}
+<div
+  :style="inlineStyle"
+  @click="handleTimeChange(index,angle)"
+  class="picker-point"
+  :class="[pointClass,{current:picked}]"
+>
+  <div
+    class="pointer-wrapper"
+    :style="wrapperStyle"
+  >
+    {{index}}
+  </div>
+</div>
 
 </template>
 

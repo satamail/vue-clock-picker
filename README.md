@@ -33,7 +33,6 @@ $ npm install vue-clock-picker
 dependencies:
 
 - [`vue@^2.0.0`](https://github.com/vuejs/vue)
-- [`pug@^2.0.0`](https://github.com/pugjs/pug)
 - [`vue-loader@^9.4.0`](https://github.com/vuejs/vue-loader)
 
 ## USAGE

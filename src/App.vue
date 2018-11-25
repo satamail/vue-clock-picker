@@ -1,7 +1,8 @@
-<template lang="pug">
+<template>
 
-div(id="app")
-	time-picker(minutes-step=15 mode="24")
+<div id="app">
+	<time-picker minutes-step=15 mode="24"></time-picker>
+</div>
 
 </template>
 

@@ -96,7 +96,7 @@ export default {
       !this.overElement && this.onFocusChange && this.onFocusChange(false)
     },
     handleTimePickFinish() {
-      onClearFocus();
+      this.onClearFocus();
     },
     toggleFocus() {
       this.focused = !this.focused

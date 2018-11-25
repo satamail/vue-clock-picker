@@ -1,12 +1,21 @@
-<template lang="pug">
-
-div(class="time-picker-modal-container")
-	div(class="time-picker-modal-header")
-		span(@click="handleStepChange(0)" class="time-picker-header" ':class'="{active:!step}") {{hourString}}
-		| &nbsp;:&nbsp;
-		span(@click="handleStepChange(1)" class="time-picker-header" ':class'="{active:step}") {{minuteString}}
-	div(class="picker-container")
-		time-picker-generator(':handle-time-pointer-click'="handleTimePointerClick" ':type'="timeType" ':hour'="hour" ':minute'="minute" :hours-step="hoursStep" :minutes-step="minutesStep")
+<template>
+  <div class="time-picker-modal-container">
+    <div class="time-picker-modal-header">
+      <span @click="handleStepChange(0)" class="time-picker-header" :class="{active:!step}"> {{hourString}} </span>
+      &nbsp;:&nbsp;
+      <span @click="handleStepChange(1)" class="time-picker-header" :class="{active:step}"> {{minuteString}} </span>
+    </div>
+    <div class="picker-container">
+      <time-picker-generator
+        :handle-time-pointer-click="handleTimePointerClick"
+        :type="timeType"
+        :hour="hour"
+        :minute="minute"
+        :hours-step="hoursStep"
+        :minutes-step="minutesStep"
+      ></time-picker-generator>
+    </div>
+  </div>
 
 </template>
 
@@ -81,7 +90,7 @@ export default {
         this.step = s
         this.pointerRotate = s == 0 ? this.resetHourDegree() : this.resetMinuteDegree()
 
-        if (s == 3) {
+        if (s === 2) {
           this.handleTimePickFinish();
         }
       }
