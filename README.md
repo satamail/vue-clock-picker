@@ -47,6 +47,7 @@ dependencies:
             mode="24" :defaultHour="defaultHour"
             :defaultMinute="defaultMinute"
             :onTimeChange="timeChangeHandler"
+            :minutesStep="15"
         >
         </vue-clock-picker>
     </div>
@@ -103,6 +104,12 @@ Whether the picker pannel is focused or not when it did mount. Default `false`
 ```javascript
 defaultFocused="false"
 ```
+
+- `hoursStep`
+Step to draw hours
+
+- `minutesStep`
+Step to draw minutes
 
 - `onFocusChange`
 

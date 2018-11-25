@@ -1,7 +1,7 @@
 <template lang="pug">
 
 div(id="app")
-	time-picker
+	time-picker(minutes-step=15 mode="24")
 
 </template>
 

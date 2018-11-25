@@ -8,8 +8,10 @@
 		<outside-click-handler :on-outside-click="onClearFocus" :focused="focused">
 			<time-picker-modal
 				:init-hour="hour" :init-minute="minute" slot="modal"
+        :hours-step="hoursStep" :minutes-step="minutesStep"
 				:handle-hour-change="handleHourChange" :handle-minute-change="handleMinuteChange"
 				:handle-time-change="handleTimeChange" v-if="focused"
+        :handle-time-pick-finish="handleTimePickFinish"
 			/>
 		</outside-click-handler>
 	</div>
@@ -58,7 +60,15 @@ export default {
     onTimeChange: {
       type: Function,
       default: () => {}
-    }
+    },
+    minutesStep: {
+      type: [Number,String],
+      default: 5,
+    },
+    hoursStep: {
+      type: [Number,String],
+      default: 1,
+    },
   },
   data() {
     return {
@@ -84,6 +94,9 @@ export default {
     onClearFocus() {
       !this.overElement && (this.focused = false)
       !this.overElement && this.onFocusChange && this.onFocusChange(false)
+    },
+    handleTimePickFinish() {
+      onClearFocus();
     },
     toggleFocus() {
       this.focused = !this.focused

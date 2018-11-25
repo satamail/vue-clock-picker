@@ -6,7 +6,7 @@ div(class="time-picker-modal-container")
 		| &nbsp;:&nbsp;
 		span(@click="handleStepChange(1)" class="time-picker-header" ':class'="{active:step}") {{minuteString}}
 	div(class="picker-container")
-		time-picker-generator(':handle-time-pointer-click'="handleTimePointerClick" ':type'="timeType" ':hour'="hour" ':minute'="minute")
+		time-picker-generator(':handle-time-pointer-click'="handleTimePointerClick" ':type'="timeType" ':hour'="hour" ':minute'="minute" :hours-step="hoursStep" :minutes-step="minutesStep")
 
 </template>
 
@@ -37,7 +37,19 @@ export default {
     handleMinuteChange: {
       type: Function,
       default: () => {}
-    }
+    },
+    handleTimePickFinish: {
+      type: Function,
+      default: () => {}
+    },
+    minutesStep: {
+      type: [Number,String],
+      default: 5,
+    },
+    hoursStep: {
+      type: [Number,String],
+      default: 1,
+    },
   },
   data() {
     return {
@@ -68,40 +80,46 @@ export default {
       if (s != this.step) {
         this.step = s
         this.pointerRotate = s == 0 ? this.resetHourDegree() : this.resetMinuteDegree()
+
+        if (s == 3) {
+          this.handleTimePickFinish();
+        }
       }
     },
     handleTimePointerClick(time, rotate) {
-      this.pointerRotate = rotate
+      this.pointerRotate = rotate;
       this.handleTimeChange(time)
     },
     handleTimeChange(time) {
       time = parseInt(time)
       if (this.step == 0) {
-        this.hour = time
-        this.handleHourChange && this.handleHourChange(time)
+        this.hour = time;
+        this.handleHourChange && this.handleHourChange(time);
+        this.handleStepChange(1);
       } else {
-        this.minute = time
-        this.handleMinuteChange && this.handleMinuteChange(time)
+        this.minute = time;
+        this.handleMinuteChange && this.handleMinuteChange(time);
+        this.handleStepChange(2);
       }
     },
     resetHourDegree() {
-      let h = parseInt(this.hour)
-      let pointerR = 0
+      let h = parseInt(this.hour);
+      let pointerR = 0;
       HOURS.forEach((hour, index) => {
         if (h === index + 1) {
           pointerR = index < 12 ? 360 * (index + 1) / 12 : 360 * (index + 1 - 12) / 12
         }
-      })
+      });
       return pointerR
     },
     resetMinuteDegree() {
-      let m = parseInt(this.minute)
-      let pointerR = 0
+      let m = parseInt(this.minute);
+      let pointerR = 0;
       MINUTES.forEach((minute, index) => {
         if (m === index) {
-          pointerR = 360 * index / 60
+          pointerR = 360 * index / 60;
         }
-      })
+      });
       return pointerR
     }
   }
